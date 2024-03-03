@@ -1,17 +1,11 @@
 import { OPENAI_API_TYPE, OPENAI_API_VERSION, OPENAI_ORGANIZATION } from '@/utils/app/const';
 
 import { OpenAIModel, OpenAIModelID, OpenAIModels } from '@/types/openai';
+import { ModelSelect } from '@/components/Chat/ModelSelect';
 
-export const config = {
-  runtime: 'edge',
-};
 
-const handler = async (req: Request): Promise<Response> => {
+export async function getAPIModels(key: string, apiHost: string) {
   try {
-    const { key, apiHost } = (await req.json()) as {
-      key: string;
-      apiHost: string;
-    };
 
     console.log('model use ctx host: ', apiHost);
 
@@ -79,12 +73,11 @@ const handler = async (req: Request): Promise<Response> => {
         }
       })
       .filter(Boolean);
-
+    return models;
     return new Response(JSON.stringify(models), { status: 200 });
   } catch (error) {
     console.error(error);
+    return [error];
     return new Response('Error', { status: 500 });
   }
 };
-
-export default handler;

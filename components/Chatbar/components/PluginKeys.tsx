@@ -1,8 +1,6 @@
 import { IconKey } from '@tabler/icons-react';
 import { KeyboardEvent, useContext, useEffect, useRef, useState } from 'react';
-
-//import { useTranslation } from 'next-i18next';
-import { useTranslation } from 'next-export-i18n';
+import { useTranslation } from 'react-i18next';
 
 import { PluginID, PluginKey } from '@/types/plugin';
 
@@ -13,7 +11,7 @@ import { SidebarButton } from '@/components/Sidebar/SidebarButton';
 import ChatbarContext from '../Chatbar.context';
 
 export const PluginKeys = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('sidebar');
 
   const {
     state: { pluginKeys },
@@ -55,7 +53,7 @@ export const PluginKeys = () => {
   return (
     <>
       <SidebarButton
-        text={t('sidebar.Plugin_Keys')}
+        text={t('Plugin Keys')}
         icon={<IconKey size={18} />}
         onClick={() => setIsChanging(true)}
       />
@@ -225,7 +223,7 @@ export const PluginKeys = () => {
                   className="mt-6 w-full rounded-lg border border-neutral-500 px-4 py-2 text-neutral-900 shadow hover:bg-neutral-100 focus:outline-none dark:border-neutral-800 dark:border-opacity-50 dark:bg-white dark:text-black dark:hover:bg-neutral-300"
                   onClick={() => setIsChanging(false)}
                 >
-                  {t('sidebar.Save')}
+                  {t('Save')}
                 </button>
               </div>
             </div>

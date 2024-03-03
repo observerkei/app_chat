@@ -1,11 +1,9 @@
-'use client'  
-
 import { useEffect, useRef, useState } from 'react';
 import { useQuery } from 'react-query';
 
-import { GetStaticProps } from 'next';
-//import { useTranslation } from 'next-i18next';
-import { useTranslation } from 'next-export-i18n';
+import { GetServerSideProps } from 'next';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 
 import { useCreateReducer } from '@/hooks/useCreateReducer';
@@ -43,8 +41,6 @@ import { HomeInitialState, initialState } from './home.state';
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { getAPIModels } from '../../../services/models';
-
 interface Props {
   serverSideApiKeyIsSet: boolean;
   serverSidePluginKeysSet: boolean;
@@ -75,7 +71,7 @@ const Home = ({
     dispatch,
   } = contextValue;
 
-  const { t } = useTranslation();
+  const { t } = useTranslation('chat');
   const { getModels } = useApiService();
   const { getModelsError } = useErrorService();
   const [initialRender, setInitialRender] = useState<boolean>(true);
@@ -168,7 +164,7 @@ const Home = ({
 
     const newConversation: Conversation = {
       id: uuidv4(),
-      name: t('chat.New_Conversation'),
+      name: t('New Conversation'),
       messages: [],
       model: lastConversation?.model || {
         id: OpenAIModels[defaultModelId].id,
@@ -322,7 +318,7 @@ const Home = ({
         field: 'selectedConversation',
         value: {
           id: uuidv4(),
-          name: t('chat.New_Conversation'),
+          name: t('New Conversation'),
           messages: [],
           model: OpenAIModels[defaultModelId],
           prompt: DEFAULT_SYSTEM_PROMPT,
@@ -333,9 +329,9 @@ const Home = ({
     }
   }, [
     defaultModelId,
+    dispatch,
     serverSideApiKeyIsSet,
     serverSidePluginKeysSet,
-    conversations,
   ]);
 
   // set models.
@@ -357,13 +353,13 @@ const Home = ({
 
   useEffect(() => {
     if (data) dispatch({ field: 'models', value: data });
-    console.log('getmodels: ', JSON.stringify(data))
-  }, [data]);
+    //console.log('getmodels: ', JSON.stringify(data))
+  }, [data, dispatch]);
 
   
   useEffect(() => {
     dispatch({ field: 'modelError', value: getModelsError(error) });
-  }, [error]);
+  }, [dispatch, error, getModelsError]);
 
   return (
     <HomeContext.Provider
@@ -413,7 +409,7 @@ const Home = ({
 };
 export default Home;
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   const defaultModelId =
     (process.env.DEFAULT_MODEL &&
       Object.values(OpenAIModelID).includes(
@@ -436,6 +432,14 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       serverSideApiKeyIsSet: !!process.env.OPENAI_API_KEY,
       defaultModelId,
       serverSidePluginKeysSet,
+      ...(await serverSideTranslations(locale ?? 'en', [
+        'common',
+        'chat',
+        'sidebar',
+        'markdown',
+        'promptbar',
+        'settings',
+      ])),
     },
   };
 };

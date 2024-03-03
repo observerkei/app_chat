@@ -1,8 +1,6 @@
 import { FC, useContext, useState } from 'react';
 
-
-//import { useTranslation } from 'next-i18next';
-import { useTranslation } from 'next-export-i18n';
+import { useTranslation } from 'next-i18next';
 
 import { DEFAULT_TEMPERATURE } from '@/utils/app/const';
 
@@ -24,7 +22,7 @@ export const TemperatureSlider: FC<Props> = ({
   const [temperature, setTemperature] = useState(
     lastConversation?.temperature ?? DEFAULT_TEMPERATURE,
   );
-  const { t } = useTranslation();
+  const { t } = useTranslation('chat');
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = parseFloat(event.target.value);
     setTemperature(newValue);
@@ -38,7 +36,7 @@ export const TemperatureSlider: FC<Props> = ({
       </label>
       <span className="text-[12px] text-black/50 dark:text-white/50 text-sm">
         {t(
-          'chat.Higher_values_like_0_8_will_make_the_output_more_random_while_lower_values_like_0_2_will_make_it_more_focused_and_deterministic',
+          'Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.',
         )}
       </span>
       <span className="mt-2 mb-1 text-center text-neutral-900 dark:text-neutral-100">
@@ -55,13 +53,13 @@ export const TemperatureSlider: FC<Props> = ({
       />
       <ul className="w mt-2 pb-8 flex justify-between px-[24px] text-neutral-900 dark:text-neutral-100">
         <li className="flex justify-center">
-          <span className="absolute">{t('chat.Precise')}</span>
+          <span className="absolute">{t('Precise')}</span>
         </li>
         <li className="flex justify-center">
-          <span className="absolute">{t('chat.Neutral')}</span>
+          <span className="absolute">{t('Neutral')}</span>
         </li>
         <li className="flex justify-center">
-          <span className="absolute">{t('chat.Creative')}</span>
+          <span className="absolute">{t('Creative')}</span>
         </li>
       </ul>
     </div>

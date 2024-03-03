@@ -16,8 +16,7 @@ import {
   useState,
 } from 'react';
 
-//import { useTranslation } from 'next-i18next';
-import { useTranslation } from 'next-export-i18n';
+import { useTranslation } from 'next-i18next';
 
 import { Message } from '@/types/chat';
 import { Plugin } from '@/types/plugin';
@@ -46,7 +45,7 @@ export const ChatInput = ({
   textareaRef,
   showScrollDownButton,
 }: Props) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('chat');
 
   const {
     state: { selectedConversation, messageIsStreaming, prompts },
@@ -77,8 +76,8 @@ export const ChatInput = ({
     if (maxLength && value.length > maxLength) {
       alert(
         t(
-          'chat.Message_limit_is',
-          { maxLength: maxLength, valueLength: value.length },
+          `Message limit is {{maxLength}} characters. You have entered {{valueLength}} characters.`,
+          { maxLength, valueLength: value.length },
         ),
       );
       return;
@@ -94,7 +93,7 @@ export const ChatInput = ({
     }
 
     if (!content) {
-      alert(t('chat.Please_enter_a_message'));
+      alert(t('Please enter a message'));
       return;
     }
 
@@ -238,7 +237,7 @@ export const ChatInput = ({
         textareaRef?.current?.scrollHeight > 400 ? 'auto' : 'hidden'
       }`;
     }
-  }, [content, textareaRef]);
+  }, [content]);
 
   useEffect(() => {
     const handleOutsideClick = (e: MouseEvent) => {
@@ -265,7 +264,7 @@ export const ChatInput = ({
             className="absolute top-0 left-0 right-0 mx-auto mb-3 flex w-fit items-center gap-3 rounded border border-neutral-200 bg-white py-2 px-4 text-black hover:opacity-50 dark:border-neutral-600 dark:bg-[#343541] dark:text-white md:mb-0 md:mt-2"
             onClick={handleStopConversation}
           >
-            <IconPlayerStop size={16} /> {t('chat.Stop_Generating')}
+            <IconPlayerStop size={16} /> {t('Stop Generating')}
           </button>
         )}
 
@@ -276,7 +275,7 @@ export const ChatInput = ({
               className="absolute top-0 left-0 right-0 mx-auto mb-3 flex w-fit items-center gap-3 rounded border border-neutral-200 bg-white py-2 px-4 text-black hover:opacity-50 dark:border-neutral-600 dark:bg-[#343541] dark:text-white md:mb-0 md:mt-2"
               onClick={onRegenerate}
             >
-              <IconRepeat size={16} /> {t('chat.Regenerate_response')}
+              <IconRepeat size={16} /> {t('Regenerate response')}
             </button>
           )}
 
@@ -326,7 +325,7 @@ export const ChatInput = ({
               }`,
             }}
             placeholder={
-              t('chat.Type_a_message_or_type_to_select_a_prompt') || ''
+              t('Type a message or type "/" to select a prompt...') || ''
             }
             value={content}
             rows={1}
@@ -391,7 +390,7 @@ export const ChatInput = ({
         </a>
         .{' '}
         {t(
-          "chat.Chatbot_UI_is_an_advanced_chatbot_kit_for_OpenAIs_chat_models_aiming_to_mimic_ChatGPTs_interface_and_functionality",
+          "Chatbot UI is an advanced chatbot kit for OpenAI's chat models aiming to mimic ChatGPT's interface and functionality.",
         )}
       </div>
     </div>

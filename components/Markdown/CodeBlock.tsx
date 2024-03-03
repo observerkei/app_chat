@@ -3,9 +3,7 @@ import { FC, memo, useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
-
-//import { useTranslation } from 'next-i18next';
-import { useTranslation } from 'next-export-i18n';
+import { useTranslation } from 'next-i18next';
 
 import {
   generateRandomString,
@@ -18,7 +16,7 @@ interface Props {
 }
 
 export const CodeBlock: FC<Props> = memo(({ language, value }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('markdown');
   const [isCopied, setIsCopied] = useState<Boolean>(false);
 
   const copyToClipboard = () => {
@@ -41,7 +39,7 @@ export const CodeBlock: FC<Props> = memo(({ language, value }) => {
       true,
     )}${fileExtension}`;
     const fileName = window.prompt(
-      t('markdown.Enter_file_name') || '',
+      t('Enter file name') || '',
       suggestedFileName,
     );
 
@@ -72,7 +70,7 @@ export const CodeBlock: FC<Props> = memo(({ language, value }) => {
             onClick={copyToClipboard}
           >
             {isCopied ? <IconCheck size={18} /> : <IconClipboard size={18} />}
-            {isCopied ? t('markdown.Copied') : t('markdown.Copy_code')}
+            {isCopied ? t('Copied!') : t('Copy code')}
           </button>
           <button
             className="flex items-center rounded bg-none p-1 text-xs text-white"

@@ -10,8 +10,7 @@ import {
 } from 'react';
 import toast from 'react-hot-toast';
 
-//import { useTranslation } from 'next-i18next';
-import { useTranslation } from 'next-export-i18n';
+import { useTranslation } from 'next-i18next';
 
 import { getEndpoint } from '@/utils/app/api';
 import {
@@ -40,7 +39,7 @@ interface Props {
 }
 
 export const Chat = memo(({ stopConversationRef }: Props) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('chat');
 
   const {
     state: {
@@ -251,7 +250,6 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
     },
     [
       apiKey,
-      apiHost,
       conversations,
       pluginKeys,
       selectedConversation,
@@ -326,7 +324,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
       setCurrentMessage(
         selectedConversation.messages[selectedConversation.messages.length - 2],
       );
-  }, [selectedConversation]);
+  }, [selectedConversation, throttledScrollDown]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -376,11 +374,11 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             </div>
             <div className="mb-2">
               {t(
-                'chat.Please_set_your_OpenAI_API_key_in_the_bottom_left_of_the_sidebar',
+                'Please set your OpenAI API key in the bottom left of the sidebar.',
               )}
             </div>
             <div>
-              {t("chat.If_you_dont_have_an_OpenAI_API_key_you_can_get_one_here")}
+              {t("If you don't have an OpenAI API key, you can get one here: ")}
               <a
                 href="https://platform.openai.com/account/api-keys"
                 target="_blank"
@@ -430,7 +428,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                       />
 
                       <TemperatureSlider
-                        label={t('chat.Temperature')}
+                        label={t('Temperature')}
                         onChangeTemperature={(temperature) =>
                           handleUpdateConversation(selectedConversation, {
                             key: 'temperature',
@@ -445,7 +443,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             ) : (
               <>
                 <div className="sticky top-0 z-10 flex justify-center border border-b-neutral-300 bg-neutral-100 py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200">
-                  {t('chat.Model')}: {selectedConversation?.model.name} | {t('chat.Temp')}
+                  {t('Model')}: {selectedConversation?.model.name} | {t('Temp')}
                   : {selectedConversation?.temperature} |
                   <button
                     className="ml-2 cursor-pointer hover:opacity-50"

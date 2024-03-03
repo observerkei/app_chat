@@ -1,8 +1,7 @@
 import { IconFileExport, IconSettings } from '@tabler/icons-react';
 import { useContext, useState } from 'react';
 
-//import { useTranslation } from 'next-i18next';
-import { useTranslation } from 'next-export-i18n';
+import { useTranslation } from 'next-i18next';
 
 import HomeContext from '@/pages/api/home/home.context';
 
@@ -16,7 +15,7 @@ import { ClearConversations } from './ClearConversations';
 import { PluginKeys } from './PluginKeys';
 
 export const ChatbarSettings = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('sidebar');
   const [isSettingDialogOpen, setIsSettingDialog] = useState<boolean>(false);
 
   const {
@@ -47,13 +46,13 @@ export const ChatbarSettings = () => {
       <Import onImport={handleImportConversations} />
 
       <SidebarButton
-        text={t('sidebar.Export_data')}
+        text={t('Export data')}
         icon={<IconFileExport size={18} />}
         onClick={() => handleExportData()}
       />
 
       <SidebarButton
-        text={t('sidebar.Settings')}
+        text={t('Settings')}
         icon={<IconSettings size={18} />}
         onClick={() => setIsSettingDialog(true)}
       />

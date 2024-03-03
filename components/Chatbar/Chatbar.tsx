@@ -1,8 +1,6 @@
 import { useCallback, useContext, useEffect } from 'react';
 
-
-//import { useTranslation } from 'next-i18next';
-import { useTranslation } from 'next-export-i18n';
+import { useTranslation } from 'next-i18next';
 
 import { useCreateReducer } from '@/hooks/useCreateReducer';
 
@@ -29,7 +27,7 @@ import { ChatbarInitialState, initialState } from './Chatbar.state';
 import { v4 as uuidv4 } from 'uuid';
 
 export const Chatbar = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('sidebar');
 
   const chatBarContextValue = useCreateReducer<ChatbarInitialState>({
     initialState,
@@ -119,7 +117,7 @@ export const Chatbar = () => {
         field: 'selectedConversation',
         value: {
           id: uuidv4(),
-          name: t('sidebar.New_Conversation'),
+          name: t('New Conversation'),
           messages: [],
           model: OpenAIModels[defaultModelId],
           prompt: DEFAULT_SYSTEM_PROMPT,
@@ -161,7 +159,7 @@ export const Chatbar = () => {
           field: 'selectedConversation',
           value: {
             id: uuidv4(),
-            name: t('sidebar.New_Conversation'),
+            name: t('New Conversation'),
             messages: [],
             model: OpenAIModels[defaultModelId],
             prompt: DEFAULT_SYSTEM_PROMPT,
@@ -201,10 +199,10 @@ export const Chatbar = () => {
         }),
       });
     } else {
-      /*chatDispatch({
+      chatDispatch({
         field: 'filteredConversations',
         value: conversations,
-      });*/
+      });
     }
   }, [searchTerm, conversations]);
 
@@ -224,7 +222,7 @@ export const Chatbar = () => {
       <Sidebar<Conversation>
         side={'left'}
         isOpen={showChatbar}
-        addItemButtonTitle={t('sidebar.New_chat')}
+        addItemButtonTitle={t('New chat')}
         itemComponent={<Conversations conversations={filteredConversations} />}
         folderComponent={<ChatFolders searchTerm={searchTerm} />}
         items={filteredConversations}
@@ -234,7 +232,7 @@ export const Chatbar = () => {
         }
         toggleOpen={handleToggleChatbar}
         handleCreateItem={handleNewConversation}
-        handleCreateFolder={() => handleCreateFolder(t('sidebar.New_folder'), 'chat')}
+        handleCreateFolder={() => handleCreateFolder(t('New folder'), 'chat')}
         handleDrop={handleDrop}
         footerComponent={<ChatbarSettings />}
       />

@@ -1,9 +1,6 @@
-'use client'  
 import { useCallback } from 'react';
 
 import { useFetch } from '@/hooks/useFetch';
-
-import { getAPIModels } from './models';
 
 export interface GetModelsRequestProps {
   key: string;
@@ -13,17 +10,25 @@ export interface GetModelsRequestProps {
 const useApiService = () => {
   const fetchService = useFetch();
 
+  // const getModels = useCallback(
+  // 	(
+  // 		params: GetManagementRoutineInstanceDetailedParams,
+  // 		signal?: AbortSignal
+  // 	) => {
+  // 		return fetchService.get<GetManagementRoutineInstanceDetailed>(
+  // 			`/v1/ManagementRoutines/${params.managementRoutineId}/instances/${params.instanceId
+  // 			}?sensorGroupIds=${params.sensorGroupId ?? ''}`,
+  // 			{
+  // 				signal,
+  // 			}
+  // 		);
+  // 	},
+  // 	[fetchService]
+  // );
+
   const getModels = useCallback(
     (params: GetModelsRequestProps, signal?: AbortSignal) => {
-      
-      console.log('home page try get model... key: ', params.key, ' apiHost: ', params.apiHost);
-
-      const ModelsResponse = getAPIModels(params.key, params.apiHost).then();
-
-      console.log('get api models: ', ModelsResponse);
-
-      return ModelsResponse;
-      fetchService.post<GetModelsRequestProps>(`/api/models`, {
+      return fetchService.post<GetModelsRequestProps>(`/api/models`, {
         body: { 
           key: params.key,
           apiHost: params.apiHost,

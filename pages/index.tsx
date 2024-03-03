@@ -1,2 +1,1 @@
-'use client'  
-export { default, getStaticProps } from './api/home';
+export { default, getServerSideProps } from './api/home';

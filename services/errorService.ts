@@ -1,14 +1,11 @@
-'use client'  
-
 import { useMemo } from 'react';
 
-//import { useTranslation } from 'next-i18next';
-import { useTranslation } from 'next-export-i18n';
+import { useTranslation } from 'next-i18next';
 
 import { ErrorMessage } from '@/types/error';
 
 const useErrorService = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('chat');
 
   return {
     getModelsError: useMemo(
@@ -16,16 +13,16 @@ const useErrorService = () => {
         return !error
           ? null
           : ({
-              title: t('chat.Error_fetching_models'),
+              title: t('Error fetching models.'),
               code: error.status || 'unknown',
               messageLines: error.statusText
                 ? [error.statusText]
                 : [
                     t(
-                      'chat.Make_sure_your_OpenAI_API_key_is_set_in_the_bottom_left_of_the_sidebar',
+                      'Make sure your OpenAI API key is set in the bottom left of the sidebar.',
                     ),
                     t(
-                      'chat.If_you_completed_this_step_OpenAI_may_be_experiencing_issues',
+                      'If you completed this step, OpenAI may be experiencing issues.',
                     ),
                   ],
             } as ErrorMessage);

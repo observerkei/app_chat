@@ -1,8 +1,6 @@
 import { FC, useContext, useEffect, useReducer, useRef } from 'react';
 
-
-//import { useTranslation } from 'next-i18next';
-import { useTranslation } from 'next-export-i18n';
+import { useTranslation } from 'next-i18next';
 
 import { useCreateReducer } from '@/hooks/useCreateReducer';
 
@@ -18,7 +16,7 @@ interface Props {
 }
 
 export const SettingDialog: FC<Props> = ({ open, onClose }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('settings');
   const settings: Settings = getSettings();
   const { state, dispatch } = useCreateReducer<Settings>({
     initialState: settings,
@@ -72,11 +70,11 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
             role="dialog"
           >
             <div className="text-lg pb-4 font-bold text-black dark:text-neutral-200">
-              {t('settings.Settings')}
+              {t('Settings')}
             </div>
 
             <div className="text-sm font-bold mb-2 text-black dark:text-neutral-200">
-              {t('settings.Theme')}
+              {t('Theme')}
             </div>
 
             <select
@@ -86,12 +84,12 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
                 dispatch({ field: 'theme', value: event.target.value })
               }
             >
-              <option value="dark">{t('settings.Dark_mode')}</option>
-              <option value="light">{t('settings.Light_mode')}</option>
+              <option value="dark">{t('Dark mode')}</option>
+              <option value="light">{t('Light mode')}</option>
             </select>
 
             <div className="text-sm font-bold mb-2 text-black dark:text-neutral-200">
-              {t('settings.API_Host')}
+              {t('API-Host')}
             </div>
 
             <input
@@ -111,7 +109,7 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
                 onClose();
               }}
             >
-              {t('settings.Save')}
+              {t('Save')}
             </button>
           </div>
         </div>

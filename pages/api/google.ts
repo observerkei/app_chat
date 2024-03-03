@@ -1,5 +1,3 @@
-'use client'  
-
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { cleanSourceText } from '@/utils/server/google';

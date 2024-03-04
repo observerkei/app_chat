@@ -1,3 +1,4 @@
+'use client'
 import { DEFAULT_SYSTEM_PROMPT, DEFAULT_TEMPERATURE } from '@/utils/app/const';
 import { OpenAIError, OpenAIStream } from '@/utils/server';
 
@@ -19,9 +20,8 @@ async function fetchWasm(url) {
   return wasmBytes;
 }
 
-const handler = async (req: Request): Promise<Response> => {
+const getAPIChat = async (req: Request): Promise<Response> => {
   console.log('try chat...');
-  //console.trace();
   try {
     const { model, messages, key, prompt, temperature, apiHost } = (await req.json()) as ChatBody;
 
@@ -83,4 +83,4 @@ const handler = async (req: Request): Promise<Response> => {
   }
 };
 
-export default handler;
+export default getAPIChat;

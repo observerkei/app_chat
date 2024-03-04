@@ -86,6 +86,9 @@ export const OpenAIStream = async (
     }
   }
 
+  console.log(res.status); // 打印状态码
+  console.log(res.headers); // 打印响应头
+  
   const stream = new ReadableStream({
     async start(controller) {
       const onParse = (event: ParsedEvent | ReconnectInterval) => {
@@ -109,10 +112,18 @@ export const OpenAIStream = async (
 
       const parser = createParser(onParse);
 
-      for await (const chunk of res.body as any) {
-        parser.feed(decoder.decode(chunk));
+      const reader = res.body.getReader();
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+    
+        const text = decoder.decode(value, { stream: true });
+
+        parser.feed(text);
+        
+        console.log("Raw data before parsing:", text); // 输出原始数据
       }
-    },
+    }
   });
 
   return stream;

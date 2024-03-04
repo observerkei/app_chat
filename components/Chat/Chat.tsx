@@ -34,6 +34,8 @@ import { SystemPrompt } from './SystemPrompt';
 import { TemperatureSlider } from './Temperature';
 import { MemoizedChatMessage } from './MemoizedChatMessage';
 
+import getAPIChat from '@/pages/api/chat';
+
 interface Props {
   stopConversationRef: MutableRefObject<boolean>;
 }
@@ -119,7 +121,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           });
         }
         const controller = new AbortController();
-        const response = await fetch(endpoint, {
+        const request = new Request(endpoint, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -127,6 +129,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           signal: controller.signal,
           body,
         });
+        const response = await getAPIChat(request);
         if (!response.ok) {
           homeDispatch({ field: 'loading', value: false });
           homeDispatch({ field: 'messageIsStreaming', value: false });

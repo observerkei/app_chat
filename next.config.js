@@ -10,9 +10,10 @@ const nextConfig = {
 
     return config;
   },
-    typescript: {
-        ignoreBuildErrors: true,
-    },
+  typescript: {
+      ignoreBuildErrors: true,
+  },
+  output: 'export',
 };
 
 module.exports = nextConfig;

@@ -10,7 +10,8 @@ import {
 } from 'react';
 import toast from 'react-hot-toast';
 
-import { useTranslation } from 'next-i18next';
+//import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-export-i18n';
 
 import { getEndpoint } from '@/utils/app/api';
 import {
@@ -34,14 +35,14 @@ import { SystemPrompt } from './SystemPrompt';
 import { TemperatureSlider } from './Temperature';
 import { MemoizedChatMessage } from './MemoizedChatMessage';
 
-import getAPIChat from '@/pages/api/chat';
+import getAPIChat from '@/services/chat';
 
 interface Props {
   stopConversationRef: MutableRefObject<boolean>;
 }
 
 export const Chat = memo(({ stopConversationRef }: Props) => {
-  const { t } = useTranslation('chat');
+  const { t } = useTranslation();
 
   const {
     state: {
@@ -377,11 +378,11 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             </div>
             <div className="mb-2">
               {t(
-                'Please set your OpenAI API key in the bottom left of the sidebar.',
+                'chat.Please_set_your_OpenAI_API_key_in_the_bottom_left_of_the_sidebar',
               )}
             </div>
             <div>
-              {t("If you don't have an OpenAI API key, you can get one here: ")}
+              {t("chat.If_you_dont_have_an_OpenAI_API_key_you_can_get_one_here")}
               <a
                 href="https://platform.openai.com/account/api-keys"
                 target="_blank"
@@ -431,7 +432,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                       />
 
                       <TemperatureSlider
-                        label={t('Temperature')}
+                        label={t('chat.Temperature')}
                         onChangeTemperature={(temperature) =>
                           handleUpdateConversation(selectedConversation, {
                             key: 'temperature',
@@ -446,7 +447,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             ) : (
               <>
                 <div className="sticky top-0 z-10 flex justify-center border border-b-neutral-300 bg-neutral-100 py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200">
-                  {t('Model')}: {selectedConversation?.model.name} | {t('Temp')}
+                  {t('chat.Model')}: {selectedConversation?.model.name} | {t('chat.Temp')}
                   : {selectedConversation?.temperature} |
                   <button
                     className="ml-2 cursor-pointer hover:opacity-50"

@@ -1,7 +1,9 @@
 import { IconFileImport } from '@tabler/icons-react';
 import { FC } from 'react';
 
-import { useTranslation } from 'next-i18next';
+
+//import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-export-i18n';
 
 import { SupportedExportFormats } from '@/types/export';
 
@@ -12,7 +14,7 @@ interface Props {
 }
 
 export const Import: FC<Props> = ({ onImport }) => {
-  const { t } = useTranslation('sidebar');
+  const { t } = useTranslation();
   return (
     <>
       <input
@@ -35,7 +37,7 @@ export const Import: FC<Props> = ({ onImport }) => {
       />
 
       <SidebarButton
-        text={t('Import data')}
+        text={t('sidebar.Import_data')}
         icon={<IconFileImport size={18} />}
         onClick={() => {
           const importFile = document.querySelector(

@@ -1,14 +1,16 @@
 import { IconExternalLink } from '@tabler/icons-react';
 import { useContext } from 'react';
 
-import { useTranslation } from 'next-i18next';
+
+//import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-export-i18n';
 
 import { OpenAIModel } from '@/types/openai';
 
 import HomeContext from '@/pages/api/home/home.context';
 
 export const ModelSelect = () => {
-  const { t } = useTranslation('chat');
+  const { t } = useTranslation();
 
   const {
     state: { selectedConversation, models, defaultModelId },
@@ -30,12 +32,12 @@ export const ModelSelect = () => {
   return (
     <div className="flex flex-col">
       <label className="mb-2 text-left text-neutral-700 dark:text-neutral-400">
-        {t('Model')}
+        {t('chat.Model')}
       </label>
       <div className="w-full rounded-lg border border-neutral-200 bg-transparent pr-2 text-neutral-900 dark:border-neutral-600 dark:text-white">
         <select
           className="w-full bg-transparent p-2"
-          placeholder={t('Select a model') || ''}
+          placeholder={t('chat.Select_a_model') || ''}
           value={selectedConversation?.model?.id || defaultModelId}
           onChange={handleChange}
         >
@@ -59,7 +61,7 @@ export const ModelSelect = () => {
           className="flex items-center"
         >
           <IconExternalLink size={18} className={'inline mr-1'} />
-          {t('View Account Usage')}
+          {t('chat.View_Account_Usage')}
         </a>
       </div>
     </div>

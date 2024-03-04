@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+
+//import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-export-i18n';
 
 import { useCreateReducer } from '@/hooks/useCreateReducer';
 
@@ -21,7 +23,7 @@ import { PromptbarInitialState, initialState } from './Promptbar.state';
 import { v4 as uuidv4 } from 'uuid';
 
 const Promptbar = () => {
-  const { t } = useTranslation('promptbar');
+  const { t } = useTranslation();
 
   const promptBarContextValue = useCreateReducer<PromptbarInitialState>({
     initialState,
@@ -128,7 +130,7 @@ const Promptbar = () => {
       <Sidebar<Prompt>
         side={'right'}
         isOpen={showPromptbar}
-        addItemButtonTitle={t('New prompt')}
+        addItemButtonTitle={t('promptbar.New_prompt')}
         itemComponent={
           <Prompts
             prompts={filteredPrompts.filter((prompt) => !prompt.folderId)}
@@ -142,7 +144,7 @@ const Promptbar = () => {
         }
         toggleOpen={handleTogglePromptbar}
         handleCreateItem={handleCreatePrompt}
-        handleCreateFolder={() => handleCreateFolder(t('New folder'), 'prompt')}
+        handleCreateFolder={() => handleCreateFolder(t('promptbar.New_folder'), 'prompt')}
         handleDrop={handleDrop}
       />
     </PromptbarContext.Provider>

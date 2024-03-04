@@ -28,7 +28,7 @@ const getAPIChat = async (req: Request): Promise<Response> => {
     console.log('chat get api Host: ', apiHost)
     console.log('chat model: ', JSON.stringify(model))
     
-    const wasm = await fetchWasm('http://localhost:2300/tiktoken_bg.wasm');
+    const wasm = await fetchWasm('/tiktoken_bg.wasm');
 
     await init((imports) => WebAssembly.instantiate(wasm, imports));
     const encoding = new Tiktoken(

@@ -1,6 +1,8 @@
 import { IconFolderPlus, IconMistOff, IconPlus } from '@tabler/icons-react';
 import { ReactNode } from 'react';
-import { useTranslation } from 'react-i18next';
+
+//import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-export-i18n';
 
 import {
   CloseSidebarButton,
@@ -40,7 +42,7 @@ const Sidebar = <T,>({
   handleCreateFolder,
   handleDrop,
 }: Props<T>) => {
-  const { t } = useTranslation('promptbar');
+  const { t } = useTranslation();
 
   const allowDrop = (e: any) => {
     e.preventDefault();
@@ -79,7 +81,7 @@ const Sidebar = <T,>({
           </button>
         </div>
         <Search
-          placeholder={t('Search...') || ''}
+          placeholder={t('promptbar.Search_prompts') || ''}
           searchTerm={searchTerm}
           onSearch={handleSearchTerm}
         />
@@ -105,7 +107,7 @@ const Sidebar = <T,>({
             <div className="mt-8 select-none text-center text-white opacity-50">
               <IconMistOff className="mx-auto mb-3" />
               <span className="text-[14px] leading-normal">
-                {t('No data.')}
+                {t('promptbar.No_data')}
               </span>
             </div>
           )}

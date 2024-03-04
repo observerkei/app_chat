@@ -5,7 +5,7 @@ const STORAGE_KEY = 'settings';
 export const getSettings = (): Settings => {
   let settings: Settings = {
     theme: 'dark',
-    apiHost: 'http://localhost:4642',
+    apiHost: 'https://api-chat.observerkei.top',
   };
   const settingsJson = localStorage.getItem(STORAGE_KEY);
   if (settingsJson) {

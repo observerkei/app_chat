@@ -9,7 +9,7 @@ const i18n = {
     en: en.i18n,
     zh: zh.i18n,
   },
-  defaultLang: "zh",
+  defaultLang: "en",
   useBrowserDefault: true,
 };
 

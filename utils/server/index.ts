@@ -121,7 +121,7 @@ export const OpenAIStream = async (
 
         parser.feed(text);
         
-        console.log("Raw data before parsing:", text); // 输出原始数据
+        //console.log("Raw data before parsing:", text); // 输出原始数据
       }
     }
   });

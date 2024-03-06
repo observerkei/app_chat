@@ -36,6 +36,7 @@ export const OpenAIStream = async (
     url = `${apiHost}/openai/deployments/${AZURE_DEPLOYMENT_ID}/chat/completions?api-version=${OPENAI_API_VERSION}`;
   }
   console.log('index get api host: ', apiHost);
+
   const res = await fetch(url, {
     headers: {
       'Content-Type': 'application/json',
@@ -93,6 +94,12 @@ export const OpenAIStream = async (
     async start(controller) {
       const onParse = (event: ParsedEvent | ReconnectInterval) => {
         if (event.type === 'event') {
+          if (event.data === '[DONE]') {
+            // server type complate.
+            controller.close();
+            return;
+          }
+
           const data = event.data;
 
           try {

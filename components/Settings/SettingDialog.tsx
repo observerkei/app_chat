@@ -86,7 +86,7 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
             </div>
 
             <select
-              className="w-full cursor-pointer p-2 text-neutral-700 bg-transparent dark:text-neutral-200 "
+              className="w-full rounded-lg shadow cursor-pointer p-2 text-neutral-700 bg-transparent dark:text-neutral-200 "
               value={state.theme}
               onChange={(event) =>
                 dispatch({ field: 'theme', value: event.target.value })
@@ -96,11 +96,12 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
               <option className='dark:bg-neutral-800' value="light">{t('settings.Light_mode')}</option>
             </select>
 
+            <div className="text-sm pt-2 mb-2 p-2items-center w-full ">
 
-            <div className="text-sm mb-2 items-center">
-              <div className="text-sm font-bold mb-2 text-black dark:text-neutral-200">
+              <div className="text-sm  font-bold mb-2 text-black dark:text-neutral-200">
                 {t('settings.API_Host')}
               </div>
+
               <div className="flex items-center flex-grow">
                 <input
                   className="w-full cursor-pointer  rounded-lg shadow  bg-transparent p-2 text-neutral-700 dark:text-neutral-200"

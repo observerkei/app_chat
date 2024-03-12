@@ -405,7 +405,7 @@ const Home = ({
             <Chatbar />
 
             <div className="flex flex-1">
-              <Chat stopConversationRef={stopConversationRef} />
+              <Chat stopConversationRef={stopConversationRef} refetch={refetch} />
             </div>
 
             <Promptbar />

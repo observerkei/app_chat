@@ -39,9 +39,10 @@ import getAPIChat from '@/services/chat';
 
 interface Props {
   stopConversationRef: MutableRefObject<boolean>;
+  refetch: () => void;
 }
 
-export const Chat = memo(({ stopConversationRef }: Props) => {
+export const Chat = memo(({ stopConversationRef, refetch }: Props) => {
   const { t } = useTranslation();
 
   const {
@@ -409,7 +410,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           </div>
         </div>
       ) : modelError ? (
-        <ErrorMessageDiv error={modelError} />
+        <ErrorMessageDiv error={modelError} refetch={refetch} />
       ) : (
         <>
           <div

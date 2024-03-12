@@ -353,14 +353,21 @@ const Home = ({
   );
 
   useEffect(() => {
-    if (data) dispatch({ field: 'models', value: data });
-    //console.log('getmodels: ', JSON.stringify(data))
+    if (data?.status == 200) {
+      console.log('getmodels done ')
+      dispatch({ field: 'models', value: data.data });
+      // clear error
+      dispatch({ field: 'modelError', value: null });
+    } else {
+      console.log('getmodels done ')
+      dispatch({ field: 'modelError', value: getModelsError(data) });
+    }
   }, [data, dispatch]);
 
   
-  useEffect(() => {
-    dispatch({ field: 'modelError', value: getModelsError(error) });
-  }, [dispatch, error, getModelsError]);
+  // useEffect(() => {
+  //     dispatch({ field: 'modelError', value: getModelsError(error) });
+  // }, [dispatch, error, getModelsError]);
 
   return (
     <HomeContext.Provider

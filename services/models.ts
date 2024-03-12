@@ -1,8 +1,6 @@
 import { OPENAI_API_TYPE, OPENAI_API_VERSION, OPENAI_ORGANIZATION } from '@/utils/app/const';
 
 import { OpenAIModel, OpenAIModelID, OpenAIModels } from '@/types/openai';
-import { ModelSelect } from '@/components/Chat/ModelSelect';
-
 
 export async function getAPIModels(key: string, apiHost: string) {
   try {
@@ -30,17 +28,14 @@ export async function getAPIModels(key: string, apiHost: string) {
     });
 
     if (response.status === 401) {
-      return new Response(response.body, {
-        status: 500,
-        headers: response.headers,
-      });
+      return {data: response.body, status: response.status};
     } else if (response.status !== 200) {
       console.error(
         `OpenAI API returned an error ${
           response.status
         }: ${await response.text()}`,
       );
-      throw new Error('OpenAI API returned an error');
+      return {data: response.body, status: response.status};
     }
 
     const json = await response.json();
@@ -49,35 +44,24 @@ export async function getAPIModels(key: string, apiHost: string) {
       .map((model: any) => {
         const model_name = (OPENAI_API_TYPE === 'azure') ? model.model : model.id;
         for (const [key, value] of Object.entries(OpenAIModelID)) {
-          /*if (value === model_name) {
-            return {
-              id: model.id,
-              name: OpenAIModels[value].name,
-            };
-          } else */
-          {
-            let model_id = model.id
-            let owned_by = model.owned_by
-            const parts = model.id.split("--");
-            if (parts.length > 1) {
-              owned_by = parts[0]
-              model_id = parts[1]
-            }
-            return {
-              id: `[${owned_by}] ${model_id}`,
-              name: model_id,
-              owned_by: owned_by,
-              tokenLimit: model.tokenLimit ? model.tokenLimit : 4000,
-            };
+          let model_id = model.id
+          let owned_by = model.owned_by
+          const parts = model.id.split("--");
+          if (parts.length > 1) {
+            owned_by = parts[0]
+            model_id = parts[1]
           }
+          return {
+            id: `[${owned_by}] ${model_id}`,
+            name: model_id,
+            owned_by: owned_by,
+            tokenLimit: model.tokenLimit ? model.tokenLimit : 4000,
+          };
         }
       })
       .filter(Boolean);
-    return models;
-    return new Response(JSON.stringify(models), { status: 200 });
+    return { data: models, status: 200};
   } catch (error) {
-    console.error(error);
-    return [error];
-    return new Response('Error', { status: 500 });
+    return { data: error, status: 500};
   }
 };

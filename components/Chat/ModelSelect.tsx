@@ -19,6 +19,13 @@ export const ModelSelect = () => {
   } = useContext(HomeContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+
+
+    console.log("recv service model api: selectedConversation ", selectedConversation)
+
+
+    console.log("recv service model api: models", models)
+
     selectedConversation &&
       handleUpdateConversation(selectedConversation, {
         key: 'model',

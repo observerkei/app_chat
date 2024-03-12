@@ -51,6 +51,12 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
     saveSettings(state);
   };
 
+  const handleRestore = () => {
+    state.apiHost = 'https://api-chat.observerkei.top';
+    homeDispatch({ field: 'apiHost', value: state.apiHost });
+    saveSettings(state);
+  };
+
   // Render nothing if the dialog is not open.
   if (!open) {
     return <></>;
@@ -90,18 +96,29 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
               <option value="light">{t('settings.Light_mode')}</option>
             </select>
 
-            <div className="text-sm font-bold mb-2 text-black dark:text-neutral-200">
-              {t('settings.API_Host')}
-            </div>
 
-            <input
-              className="w-full cursor-pointer bg-transparent p-2 text-neutral-700 dark:text-neutral-200"
-              value={state.apiHost}
-              onChange={(event) =>
-                dispatch({ field: 'apiHost', value: event.target.value })
-              }
-            >
-            </input>
+            <div className="text-sm mb-2 items-center">
+              <div className="text-sm font-bold mb-2 text-black dark:text-neutral-200">
+                {t('settings.API_Host')}
+              </div>
+              <div className="flex items-center flex-grow">
+                <input
+                  className="w-full cursor-pointer bg-transparent p-2 text-neutral-700 dark:text-neutral-200"
+                  value={state.apiHost}
+                  onChange={(event) =>
+                    dispatch({ field: 'apiHost', value: event.target.value })
+                  }
+                />
+              
+                <button
+                  type="button"
+                  className="px-4 py-2 border rounded-lg shadow border-neutral-500 text-neutral-900 hover:bg-neutral-100 focus:outline-none dark:hover:text-black dark:border-neutral-800 dark:border-opacity-50 dark:bg-back dark:text-white dark:hover:bg-neutral-300 ml-2"
+                  onClick={handleRestore}
+                >
+                  ⟳
+                </button>
+              </div>
+            </div>
 
             <button
               type="button"

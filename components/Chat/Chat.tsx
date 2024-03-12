@@ -78,9 +78,11 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
         let updatedConversation: Conversation;
         if (deleteCount) {
           const updatedMessages = [...selectedConversation.messages];
+
           for (let i = 0; i < deleteCount; i++) {
             updatedMessages.pop();
           }
+
           updatedConversation = {
             ...selectedConversation,
             messages: [...updatedMessages, message],
@@ -159,16 +161,28 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           let done = false;
           let isFirst = true;
           let text = '';
+
+          let has_error = false
+
           while (!done) {
-            if (stopConversationRef.current === true) {
+            if (stopConversationRef.current === true || true === has_error) {
               controller.abort();
               done = true;
               break;
             }
-            const { value, done: doneReading } = await reader.read();
-            done = doneReading;
-            const chunkValue = decoder.decode(value);
-            text += chunkValue;
+            let chunkValue = ''
+            try {
+              const { value, done: doneReading } = await reader.read();
+              done = doneReading;
+              chunkValue = decoder.decode(value);
+              text += chunkValue;
+
+            } catch (error) {
+              has_error = true
+              chunkValue = `${error}`
+              toast.error(`Error: ${error}`);
+            }
+
             if (isFirst) {
               isFirst = false;
               const updatedMessages: Message[] = [

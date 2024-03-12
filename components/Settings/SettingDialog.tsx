@@ -86,14 +86,14 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
             </div>
 
             <select
-              className="w-full cursor-pointer bg-transparent p-2 text-neutral-700 dark:text-neutral-200"
+              className="w-full cursor-pointer p-2 text-neutral-700 bg-transparent dark:text-neutral-200 "
               value={state.theme}
               onChange={(event) =>
                 dispatch({ field: 'theme', value: event.target.value })
               }
             >
-              <option value="dark">{t('settings.Dark_mode')}</option>
-              <option value="light">{t('settings.Light_mode')}</option>
+              <option className='dark:bg-neutral-800' value="dark">{t('settings.Dark_mode')}</option>
+              <option className='dark:bg-neutral-800' value="light">{t('settings.Light_mode')}</option>
             </select>
 
 
@@ -103,16 +103,16 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
               </div>
               <div className="flex items-center flex-grow">
                 <input
-                  className="w-full cursor-pointer bg-transparent p-2 text-neutral-700 dark:text-neutral-200"
+                  className="w-full cursor-pointer  rounded-lg shadow  bg-transparent p-2 text-neutral-700 dark:text-neutral-200"
                   value={state.apiHost}
                   onChange={(event) =>
                     dispatch({ field: 'apiHost', value: event.target.value })
                   }
                 />
-              
+
                 <button
                   type="button"
-                  className="px-4 py-2 border rounded-lg shadow border-neutral-500 text-neutral-900 hover:bg-neutral-100 focus:outline-none dark:hover:text-black dark:border-neutral-800 dark:border-opacity-50 dark:bg-back dark:text-white dark:hover:bg-neutral-300 ml-2"
+                  className="px-4 py-2 rounded-lg shadow  text-neutral-900 hover:bg-neutral-100 focus:outline-none dark:hover:text-black dark:border-neutral-800 dark:border-opacity-50 dark:bg-back dark:text-white dark:hover:bg-neutral-300 ml-2"
                   onClick={handleRestore}
                 >
                   ⟳

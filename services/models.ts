@@ -25,6 +25,7 @@ export async function getAPIModels(key: string, apiHost: string) {
           'OpenAI-Organization': OPENAI_ORGANIZATION,
         }),
       },
+      credentials: 'include' // 跨域请求 包含凭据，如 Cookie
     });
 
     if (response.status === 401) {

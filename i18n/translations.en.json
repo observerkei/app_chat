@@ -8,7 +8,7 @@
         "Prompt_limit_is": "Prompt limit is {{maxLength}} characters",
         "New_Conversation": "New Conversation",
         "System_Prompt": "System Prompt",
-        "You_are_ChatGPT_a_large_language_model_trained_by_OpenAI_Follow_the_users_instructions_carefully_Respond_using_markdown": "You are ChatGPT, a large language model trained by OpenAI. Follow the user's instructions carefully. Respond using markdown.",
+        "You_are_ChatGPT_a_large_language_model_trained_by_OpenAI_Follow_the_users_instructions_carefully_Respond_using_markdown": " ",
         "Enter_a_prompt": "Enter a prompt",
         "Regenerate_response": "Regenerate response",
         "Sorry_there_was_an_error": "Sorry, there was an error.",

@@ -66,6 +66,7 @@ export const OpenAIStream = async (
       stream: true,
     }),
     signal: sendMessagesSignal,
+    credentials: 'include' // 跨域请求 包含凭据，如 Cookie
   });
 
   const encoder = new TextEncoder();

@@ -78,7 +78,7 @@ const Home = ({
   const [initialRender, setInitialRender] = useState<boolean>(true);
 
 
-  const stopConversationRef = useRef<boolean>(false);
+  const stopConversationRef = useRef<AbortController>();
 
 
   // FETCH MODELS ----------------------------------------------

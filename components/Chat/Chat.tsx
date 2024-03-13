@@ -38,7 +38,7 @@ import { MemoizedChatMessage } from './MemoizedChatMessage';
 import getAPIChat from '@/services/chat';
 
 interface Props {
-  stopConversationRef: MutableRefObject<boolean>;
+  stopConversationRef: MutableRefObject<AbortController>;
   refetch: () => void;
 }
 
@@ -124,15 +124,16 @@ export const Chat = memo(({ stopConversationRef, refetch }: Props) => {
               ?.requiredKeys.find((key) => key.key === 'GOOGLE_CSE_ID')?.value,
           });
         }
-        const controller = new AbortController();
+        stopConversationRef.current = new AbortController();
         const request = new Request(endpoint, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          signal: controller.signal,
+          signal: stopConversationRef.current.signal,
           body,
         });
+
         const response = await getAPIChat(request);
         if (!response.ok) {
           homeDispatch({ field: 'loading', value: false });
@@ -166,8 +167,9 @@ export const Chat = memo(({ stopConversationRef, refetch }: Props) => {
           let has_error = false
 
           while (!done) {
-            if (stopConversationRef.current === true || true === has_error) {
-              controller.abort();
+            console.log("try check stop... ")
+            if (true === has_error) {
+              stopConversationRef.current.abort();
               done = true;
               break;
             }
@@ -178,10 +180,13 @@ export const Chat = memo(({ stopConversationRef, refetch }: Props) => {
               chunkValue = decoder.decode(value);
               text += chunkValue;
 
+
             } catch (error) {
               has_error = true
-              chunkValue = `${error}`
-              toast.error(`Error: ${error}`);
+              chunkValue = `\n${error}`
+              text += chunkValue;
+
+              //toast.error(`Error: ${error}`);
             }
 
             if (isFirst) {

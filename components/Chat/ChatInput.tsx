@@ -33,7 +33,7 @@ interface Props {
   onSend: (message: Message, plugin: Plugin | null) => void;
   onRegenerate: () => void;
   onScrollDownClick: () => void;
-  stopConversationRef: MutableRefObject<boolean>;
+  stopConversationRef: MutableRefObject<AbortController>;
   textareaRef: MutableRefObject<HTMLTextAreaElement | null>;
   showScrollDownButton: boolean;
 }
@@ -108,10 +108,12 @@ export const ChatInput = ({
   };
 
   const handleStopConversation = () => {
-    stopConversationRef.current = true;
-    setTimeout(() => {
-      stopConversationRef.current = false;
-    }, 1000);
+    console.log("user click stop...")
+    stopConversationRef.current.abort()
+    // stopConversationRef.current = true;
+    // setTimeout(() => {
+    //   stopConversationRef.current = false;
+    // }, 1000);
   };
 
   const isMobile = () => {

@@ -23,6 +23,7 @@ async function fetchWasm(url) {
 const getAPIChat = async (req: Request): Promise<Response> => {
   console.log('try chat...');
   try {
+    const sendMessagesSignal = req.signal;
     const { model, messages, key, prompt, temperature, apiHost } = (await req.json()) as ChatBody;
 
     console.log('chat get api Host: ', apiHost)
@@ -70,7 +71,8 @@ const getAPIChat = async (req: Request): Promise<Response> => {
       temperatureToUse, 
       key, 
       messagesToSend,
-      apiHost);
+      apiHost,
+      sendMessagesSignal);
 
     return new Response(stream);
   } catch (error) {

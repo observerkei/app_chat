@@ -30,6 +30,7 @@ export const OpenAIStream = async (
   key: string,
   messages: Message[],
   apiHost: string,
+  sendMessagesSignal: AbortSignal, 
 ) => {
   let url = `${apiHost}/v1/chat/completions`;
   if (OPENAI_API_TYPE === 'azure') {
@@ -64,6 +65,7 @@ export const OpenAIStream = async (
       temperature: temperature,
       stream: true,
     }),
+    signal: sendMessagesSignal,
   });
 
   const encoder = new TextEncoder();

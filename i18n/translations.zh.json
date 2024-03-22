@@ -64,6 +64,7 @@
         "Theme": "主题",
         "Dark_mode": "深色模式",
         "Light_mode": "浅色模式",
+        "System_default": "系统默认",
         "Save": "保存",
         "API_Host": "API路由"
       },

@@ -10,6 +10,8 @@ import { getSettings, saveSettings } from '@/utils/app/settings';
 
 import { Settings } from '@/types/settings';
 
+import { changeTheme } from '@/services/theme';
+
 import HomeContext from '@/pages/api/home/home.context';
 
 interface Props {
@@ -46,7 +48,7 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
   }, [onClose]);
 
   const handleSave = () => {
-    homeDispatch({ field: 'lightMode', value: state.theme });
+    changeTheme(homeDispatch, state.theme);
     homeDispatch({ field: 'apiHost', value: state.apiHost });
     saveSettings(state);
   };
@@ -92,6 +94,7 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
                 dispatch({ field: 'theme', value: event.target.value })
               }
             >
+              <option className='dark:bg-neutral-800' value="system-default">{t('settings.System_default')}</option>
               <option className='dark:bg-neutral-800' value="dark">{t('settings.Dark_mode')}</option>
               <option className='dark:bg-neutral-800' value="light">{t('settings.Light_mode')}</option>
             </select>

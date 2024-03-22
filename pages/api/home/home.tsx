@@ -10,6 +10,7 @@ import { useCreateReducer } from '@/hooks/useCreateReducer';
 
 import useErrorService from '@/services/errorService';
 import useApiService from '@/services/useApiService';
+import { changeTheme, enableAutoTheme } from '@/services/theme';
 
 import {
   cleanConversationHistory,
@@ -232,13 +233,14 @@ const Home = ({
 
   // ON LOAD --------------------------------------------
 
+  // auto check theme change
+  enableAutoTheme(dispatch);
+
   useEffect(() => {
+    // theme
     const settings = getSettings();
     if (settings.theme) {
-      dispatch({
-        field: 'lightMode',
-        value: settings.theme,
-      });
+      changeTheme(dispatch, settings.theme);
     }
     if (settings.apiHost) {
       dispatch({

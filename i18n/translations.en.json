@@ -64,6 +64,7 @@
         "Theme": "Theme",
         "Dark_mode": "Dark mode",
         "Light_mode": "Light mode",
+        "System_default": "System default",
         "Save": "Save",
         "API_Host": "API-Host"
       },

@@ -9,7 +9,7 @@ export interface HomeInitialState {
   apiKey: string;
   pluginKeys: PluginKey[];
   loading: boolean;
-  lightMode: 'light' | 'dark';
+  lightMode: 'light' | 'dark' | 'system-default';
   apiHost: string;
   messageIsStreaming: boolean;
   modelError: ErrorMessage | null;
@@ -34,7 +34,7 @@ export const initialState: HomeInitialState = {
   apiKey: '',
   loading: false,
   pluginKeys: [],
-  lightMode: 'dark',
+  lightMode: 'system-default',
   apiHost: '',
   messageIsStreaming: false,
   modelError: null,

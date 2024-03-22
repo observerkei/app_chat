@@ -38,6 +38,17 @@ export const OpenAIStream = async (
   }
   console.log('index get api host: ', apiHost);
 
+  function get_fetch_chat_model(url: string) {
+    if (url.toLowerCase().includes('localhost') 
+        || url.includes('192.168.')
+        || url.includes('127.0.0.1')
+        || url.toLowerCase().includes('observerkei')) {
+      return { model: model.name, owned_by: model.owned_by }
+    } else {
+      return {model: model.name }
+    }
+  }
+
   const res = await fetch(url, {
     headers: {
       'Content-Type': 'application/json',
@@ -53,7 +64,7 @@ export const OpenAIStream = async (
     },
     method: 'POST',
     body: JSON.stringify({
-      ...(OPENAI_API_TYPE === 'openai' && {model: model.name, owned_by: model.owned_by }),
+      ...(OPENAI_API_TYPE === 'openai' && get_fetch_chat_model(url)),
       messages: [
         {
           role: 'system',

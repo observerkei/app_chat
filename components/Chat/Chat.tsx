@@ -367,7 +367,7 @@ export const Chat = memo(({ stopConversationRef, refetch }: Props) => {
   }, [messagesEndRef]);
 
   return (
-    <div className="relative flex-1 overflow-hidden bg-white dark:bg-[#343541]">
+    <div className="relative flex-1 overflow-hidden bg-white dark:bg-[#171717]">
       {!(apiKey || serverSideApiKeyIsSet) ? (
         <div className="mx-auto flex h-full w-[300px] flex-col justify-center space-y-6 sm:w-[600px]">
           <div className="text-center text-4xl font-bold text-black dark:text-white">
@@ -458,7 +458,7 @@ export const Chat = memo(({ stopConversationRef, refetch }: Props) => {
               </>
             ) : (
               <>
-                <div className="sticky top-0 z-10 flex justify-center border border-b-neutral-300 bg-neutral-100 py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200">
+                <div className="sticky top-0 z-10 flex justify-center border border-b-neutral-300 bg-neutral-100 py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#252525] dark:text-neutral-200">
                   {t('chat.Model')}: {selectedConversation?.model.name} | {t('chat.Temp')}
                   : {selectedConversation?.temperature} |
                   <button
@@ -501,7 +501,7 @@ export const Chat = memo(({ stopConversationRef, refetch }: Props) => {
                 {loading && <ChatLoader />}
 
                 <div
-                  className="h-[162px] bg-white dark:bg-[#343541]"
+                  className="h-[162px] bg-white dark:bg-[#171717]"
                   ref={messagesEndRef}
                 />
               </>

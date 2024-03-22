@@ -5,16 +5,18 @@ import { useState, useEffect } from 'react';
 
 export const changeTheme = (homeDispatch: any, theme: string): boolean => {
     if ('system-default' == theme) {
-        const isDarkTheme = window.matchMedia('(prefers-color-scheme: dark)');
+        const isLightTheme = window.matchMedia('(prefers-color-scheme: light)').matches;
+        const isDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (isLightTheme) {
+            homeDispatch({
+                field: 'lightMode',
+                value: 'light',
+            });
+        }
         if (isDarkTheme) {
             homeDispatch({
                 field: 'lightMode',
                 value: 'dark',
-            });
-        } else {
-            homeDispatch({
-                field: 'lightMode',
-                value: 'light',
             });
         }
     } else {

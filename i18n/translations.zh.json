@@ -11,6 +11,7 @@
         "You_are_ChatGPT_a_large_language_model_trained_by_OpenAI_Follow_the_users_instructions_carefully_Respond_using_markdown": "你是 ChatGPT，一个由 OpenAI 训练的大型语言模型。请仔细遵循用户的指示。使用 Markdown 格式进行回应。",
         "Enter_a_prompt": "输入一个提示",
         "Regenerate_response": "重新生成回应",
+        "Send_a_space_to_continue": "发送一个空格继续",
         "Sorry_there_was_an_error": "抱歉，出现了错误。",
         "Model": "模型",
         "Conversation": "对话",

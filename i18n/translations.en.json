@@ -10,6 +10,7 @@
         "System_Prompt": "System Prompt",
         "You_are_ChatGPT_a_large_language_model_trained_by_OpenAI_Follow_the_users_instructions_carefully_Respond_using_markdown": " ",
         "Enter_a_prompt": "Enter a prompt",
+        "Send_a_space_to_continue": "Send a space to continue",
         "Regenerate_response": "Regenerate response",
         "Sorry_there_was_an_error": "Sorry, there was an error.",
         "Model": "Model",

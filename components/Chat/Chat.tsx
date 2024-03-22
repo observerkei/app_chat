@@ -173,7 +173,7 @@ export const Chat = memo(({ stopConversationRef, refetch }: Props) => {
               done = true;
               break;
             }
-            let chunkValue = ''
+            let chunkValue = ' '
             try {
               const { value, done: doneReading } = await reader.read();
               done = doneReading;
@@ -333,14 +333,6 @@ export const Chat = memo(({ stopConversationRef, refetch }: Props) => {
     }
   };
   const throttledScrollDown = throttle(scrollDown, 250);
-
-  // useEffect(() => {
-  //   console.log('currentMessage', currentMessage);
-  //   if (currentMessage) {
-  //     handleSend(currentMessage);
-  //     homeDispatch({ field: 'currentMessage', value: undefined });
-  //   }
-  // }, [currentMessage]);
 
   useEffect(() => {
     throttledScrollDown();
@@ -528,6 +520,10 @@ export const Chat = memo(({ stopConversationRef, refetch }: Props) => {
               if (currentMessage) {
                 handleSend(currentMessage, 2, null);
               }
+            }}
+            onRegenerateSpase={() => {
+              const spaceMsg: Message = { role: 'user', content: ' ' }
+              handleSend(spaceMsg, 0, null);
             }}
             showScrollDownButton={showScrollDownButton}
           />

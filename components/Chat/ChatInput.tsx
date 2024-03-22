@@ -4,6 +4,7 @@ import {
   IconBrandGoogle,
   IconPlayerStop,
   IconRepeat,
+  IconPlayerTrackNext,
   IconSend,
 } from '@tabler/icons-react';
 import {
@@ -29,9 +30,12 @@ import { PluginSelect } from './PluginSelect';
 import { PromptList } from './PromptList';
 import { VariableModal } from './VariableModal';
 
+import { OpenAIModel } from '@/types/openai';
+
 interface Props {
   onSend: (message: Message, plugin: Plugin | null) => void;
   onRegenerate: () => void;
+  onRegenerateSpase: () => void;
   onScrollDownClick: () => void;
   stopConversationRef: MutableRefObject<AbortController>;
   textareaRef: MutableRefObject<HTMLTextAreaElement | null>;
@@ -41,6 +45,7 @@ interface Props {
 export const ChatInput = ({
   onSend,
   onRegenerate,
+  onRegenerateSpase,
   onScrollDownClick,
   stopConversationRef,
   textareaRef,
@@ -258,6 +263,34 @@ export const ChatInput = ({
       window.removeEventListener('click', handleOutsideClick);
     };
   }, []);
+  
+  function is_aimi_task_model(model: OpenAIModel) {
+    if ('Aimi' == model.owned_by && model.id.includes('task'))
+      return true
+    return false
+  }
+
+  const ShowRegenerateButton = (model: OpenAIModel) => {
+    if (is_aimi_task_model(model)) {
+      return (
+        <button
+          className="absolute top-0 left-0 right-0 mx-auto mb-3 flex w-fit items-center gap-3 rounded border border-neutral-200 bg-white py-2 px-4 text-black hover:opacity-50 dark:border-neutral-600 dark:bg-[#343541] dark:text-white md:mb-0 md:mt-2"
+          onClick={onRegenerateSpase}
+        >
+          <IconPlayerTrackNext size={16} /> {t('chat.Send_a_space_to_continue')}
+        </button>
+      )
+    } else {
+      return (
+        <button
+          className="absolute top-0 left-0 right-0 mx-auto mb-3 flex w-fit items-center gap-3 rounded border border-neutral-200 bg-white py-2 px-4 text-black hover:opacity-50 dark:border-neutral-600 dark:bg-[#343541] dark:text-white md:mb-0 md:mt-2"
+          onClick={onRegenerate}
+        >
+          <IconRepeat size={16} /> {t('chat.Regenerate_response')}
+        </button>
+      )
+    }
+  };
 
   return (
     <div className="absolute bottom-0 left-0 w-full border-transparent bg-gradient-to-b from-transparent via-white to-white pt-6 dark:border-white/20 dark:via-[#343541] dark:to-[#343541] md:pt-2">
@@ -274,12 +307,7 @@ export const ChatInput = ({
         {!messageIsStreaming &&
           selectedConversation &&
           selectedConversation.messages.length > 0 && (
-            <button
-              className="absolute top-0 left-0 right-0 mx-auto mb-3 flex w-fit items-center gap-3 rounded border border-neutral-200 bg-white py-2 px-4 text-black hover:opacity-50 dark:border-neutral-600 dark:bg-[#343541] dark:text-white md:mb-0 md:mt-2"
-              onClick={onRegenerate}
-            >
-              <IconRepeat size={16} /> {t('chat.Regenerate_response')}
-            </button>
+            ShowRegenerateButton(selectedConversation?.model)
           )}
 
         <div className="relative mx-2 flex w-full flex-grow flex-col rounded-md border border-black/10 bg-white shadow-[0_0_10px_rgba(0,0,0,0.10)] dark:border-gray-900/50 dark:bg-[#40414F] dark:text-white dark:shadow-[0_0_15px_rgba(0,0,0,0.10)] sm:mx-4">

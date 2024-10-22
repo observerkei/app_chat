@@ -11,7 +11,11 @@ function createWindow () {
     }
   })
 
-  win.loadFile('out/index.html') 
+  if (!app.isPackaged) {
+    win.loadFile('out/index.html') 
+  } else {
+    win.loadFile(path.join(process.resourcesPath, "index.html"));
+  }
 
   win.once('ready-to-show', (event) => {
       win.show()

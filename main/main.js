@@ -5,12 +5,17 @@ function createWindow () {
   const win = new BrowserWindow({
     width: 1280,
     height: 720,
+    show: false,
     webPreferences: {
       preload: path.join(__dirname, 'main/preload.js')
     }
   })
 
-  win.loadFile('out/index.html')
+  win.loadFile('out/index.html') 
+
+  win.once('ready-to-show', (event) => {
+      win.show()
+  })
 }
 
 app.whenReady().then(() => {
@@ -28,3 +33,7 @@ app.on('window-all-closed', () => {
     app.quit()
   }
 })
+
+
+
+

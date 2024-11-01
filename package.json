@@ -15,6 +15,7 @@
     "efmake": "electron-forge make",
     "efstart": "electron-forge start",
     "efpackage": "electron-forge package",
+    "efbuild": "next build && next-export-fixer && electron-forge make",
     "lint": "next lint",
     "format": "prettier --write .",
     "test": "vitest",

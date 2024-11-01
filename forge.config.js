@@ -3,6 +3,7 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 
 module.exports = {
   packagerConfig: {
+    icon: './out/favicon.ico',
     asar: true,
     ignore: [
         "^/.*/.*$"
@@ -20,16 +21,22 @@ module.exports = {
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
-      config: {},
+      config: {
+        setupIcon: './out/favicon.ico'
+      },
     },
     {
       name: '@electron-forge/maker-zip',
-      platforms: ['darwin'],
+      platforms: ['win32', 'darwin'],
     },
-    {
-      name: '@electron-forge/maker-deb',
-      config: {},
-    }
+    { 
+      name: '@electron-forge/maker-deb', 
+      config: {}, 
+    }, 
+    { 
+      name: '@electron-forge/maker-rpm', 
+      config: {}, 
+    }, 
   ],
   plugins: [
     {

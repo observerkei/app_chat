@@ -1,5 +1,12 @@
 const { app, BrowserWindow } = require('electron/main')
 const path = require('node:path')
+const electron = require('electron')
+
+/*获取electron窗体的菜单栏*/
+const Menu = electron.Menu
+/*隐藏electron创听的菜单栏*/
+Menu.setApplicationMenu(null)
+
 
 function createWindow () {
   const win = new BrowserWindow({

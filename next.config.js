@@ -13,7 +13,7 @@ const nextConfig = {
   typescript: {
       ignoreBuildErrors: true,
   },
-  output: 'export',
+  output: "standalone",
 };
 
 module.exports = nextConfig;

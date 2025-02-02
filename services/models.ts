@@ -1,4 +1,4 @@
-import { OPENAI_API_TYPE, OPENAI_API_VERSION, OPENAI_ORGANIZATION } from '@/utils/app/const';
+import { OPENAI_API_TYPE, OPENAI_API_VERSION, OPENAI_ORGANIZATION, MODULE_TOKEN_LIMIT } from '@/utils/app/const';
 
 import { OpenAIModel, OpenAIModelID, OpenAIModels } from '@/types/openai';
 
@@ -56,7 +56,7 @@ export async function getAPIModels(key: string, apiHost: string) {
             id: `[${owned_by}] ${model_id}`,
             name: model_id,
             owned_by: owned_by,
-            tokenLimit: model.tokenLimit ? model.tokenLimit : 4000,
+            tokenLimit: model.tokenLimit ? model.tokenLimit : MODULE_TOKEN_LIMIT,
           };
         }
       })

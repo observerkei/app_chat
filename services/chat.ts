@@ -6,6 +6,7 @@ import { ChatBody, Message } from '@/types/chat';
 
 import tiktokenModel from '@dqbd/tiktoken/encoders/cl100k_base.json';
 import { Tiktoken, init } from '@dqbd/tiktoken/lite/init';
+// import { /tiktoken_bg.wasm } from '@dqbd/tiktoken//tiktoken_bg.wasm;
 
 export const config = {
   runtime: 'edge',

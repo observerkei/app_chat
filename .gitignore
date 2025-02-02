@@ -48,3 +48,6 @@ next-env.d.ts
 pnpm-lock.yaml
 
 .env
+
+# yarn
+yarn.lock

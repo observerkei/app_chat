@@ -21,4 +21,4 @@ export const AZURE_DEPLOYMENT_ID =
   process.env.AZURE_DEPLOYMENT_ID || '';
 
 export const MODULE_TOKEN_LIMIT =
-  process.env.MODULE_TOKEN_LIMIT || 32000;
+  Number(process.env.MODULE_TOKEN_LIMIT) || 32000;

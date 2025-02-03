@@ -1,4 +1,4 @@
-import { OPENAI_API_TYPE } from '../utils/app/const';
+import { OPENAI_API_TYPE, MODULE_TOKEN_LIMIT } from '../utils/app/const';
 
 export interface OpenAIModel {
   id: string;
@@ -16,7 +16,8 @@ export enum OpenAIModelID {
 }
 
 // in case the `DEFAULT_MODEL` environment variable is not set or set to an unsupported model
-export const fallbackModelID = OpenAIModelID.GPT_3_5;
+// If no model can be matched, this model will be selected automatically
+export const fallbackModelID = OpenAIModelID.GPT_4_32K;
 
 export const OpenAIModels: Record<OpenAIModelID, OpenAIModel> = {
   [OpenAIModelID.GPT_3_5]: {
@@ -44,7 +45,7 @@ export const OpenAIModels: Record<OpenAIModelID, OpenAIModel> = {
     id: OpenAIModelID.GPT_4_32K,
     name: 'GPT-4-32K',
     maxLength: 96000,
-    tokenLimit: 32000,
+    tokenLimit: MODULE_TOKEN_LIMIT,
     owned_by: 'openai',
   },
 };

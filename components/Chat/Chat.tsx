@@ -459,8 +459,12 @@ export const Chat = memo(({ stopConversationRef, refetch }: Props) => {
             ) : (
               <>
                 <div className="sticky top-0 z-10 flex justify-center border border-b-neutral-300 bg-neutral-100 py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#252525] dark:text-neutral-200">
-                  {t('chat.Model')}: {selectedConversation?.model.name} | {t('chat.Temp')}
-                  : {selectedConversation?.temperature} |
+                  <center>
+
+                  {t('chat.Model')}: {selectedConversation?.model.name} | 
+                  {t('chat.Temperature')}: {selectedConversation?.temperature} |
+                  </center>
+
                   <button
                     className="ml-2 cursor-pointer hover:opacity-50"
                     onClick={handleSettings}

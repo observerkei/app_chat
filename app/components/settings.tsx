@@ -75,6 +75,7 @@ import {
   ChatGLM,
   DeepSeek,
   SiliconFlow,
+  APICHAT_OBSERVERKEI_URL,
 } from "../constant";
 import { Prompt, SearchService, usePromptStore } from "../store/prompt";
 import { ErrorBoundary } from "./error";
@@ -739,24 +740,48 @@ export function Settings() {
       </ListItem>
     );
 
+  const updateModelsHandle = (models: string) =>
+    config.update((config) => (config.customModels = models));
+
   const openAIConfigComponent = accessStore.provider ===
     ServiceProvider.OpenAI && (
     <>
       <ListItem
         title={Locale.Settings.Access.OpenAI.Endpoint.Title}
         subTitle={Locale.Settings.Access.OpenAI.Endpoint.SubTitle}
+        vertical={true}
       >
-        <input
-          aria-label={Locale.Settings.Access.OpenAI.Endpoint.Title}
-          type="text"
-          value={accessStore.openaiUrl}
-          placeholder={OPENAI_BASE_URL}
-          onChange={(e) =>
-            accessStore.update(
-              (access) => (access.openaiUrl = e.currentTarget.value),
-            )
-          }
-        ></input>
+        <div
+          style={{
+            width: "100%",
+            maxWidth: "unset",
+            textAlign: "left",
+            display: "flex",
+          }}
+        >
+          <IconButton
+            icon={<ResetIcon />}
+            onClick={() =>
+              accessStore.update(
+                (access) => (access.openaiUrl = APICHAT_OBSERVERKEI_URL),
+              )
+            }
+          />
+          <input
+            type="text"
+            value={accessStore.openaiUrl}
+            placeholder={OPENAI_BASE_URL}
+            onChange={(e) => {
+              accessStore.update(
+                (access) => (access.openaiUrl = e.currentTarget.value),
+              );
+            }}
+            style={{
+              maxWidth: "unset",
+              flex: "1 1 auto",
+            }}
+          ></input>
+        </div>
       </ListItem>
       <ListItem
         title={Locale.Settings.Access.OpenAI.ApiKey.Title}
@@ -1883,11 +1908,7 @@ export function Settings() {
             ></input>
           </ListItem>
 
-          <AutoGetModelsSwitch
-            updateModelsHandle={(models: string) =>
-              config.update((config) => (config.customModels = models))
-            }
-          />
+          <AutoGetModelsSwitch updateModelsHandle={updateModelsHandle} />
 
           <OnlyCustomModelsSwitch />
         </List>

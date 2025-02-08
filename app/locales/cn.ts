@@ -542,6 +542,10 @@ const cn = {
         Title: "自动获取模型名",
         SubTitle: "勾选后，自动通过`/v1/models`获取模型列表。",
       },
+      OnlyCustomModel: {
+        Title: "只使用自定义模型",
+        SubTitle: "勾选后，只会有自定义模型才会显示。",
+      },
     },
 
     Model: "模型 (model)",

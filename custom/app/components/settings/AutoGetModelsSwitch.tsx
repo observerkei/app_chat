@@ -7,7 +7,7 @@ import {
 } from "@/app/store";
 import { ChatGPTApi } from "@/app/client/platforms/openai";
 
-const updateCustomModels = (updateModelsHandle: any) => {
+export const updateCustomModels = (updateModelsHandle: any) => {
     const api = new ChatGPTApi();
 
     setTimeout((async () => {
@@ -46,12 +46,12 @@ export function AutoGetModelsSwitch({
             <input
                 aria-label={Locale.Settings.Access.AotuCustomModel.Title}
                 type="checkbox"
-                checked={!config.autoGetModels}
+                checked={config.autoGetModels}
                 onChange={(e) => {
                     updateConfig(
-                        (config) => (config.autoGetModels = !e.currentTarget.checked),
+                        (config) => (config.autoGetModels = e.currentTarget.checked),
                     );
-                    if (config.autoGetModels) {
+                    if (e.currentTarget.checked) {
                         updateCustomModels(updateModelsHandle);
                     }
                 }}

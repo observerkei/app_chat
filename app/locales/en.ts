@@ -526,6 +526,10 @@ const en: LocaleType = {
         Title: "Auto Get Models",
         SubTitle: "Check to fetch model list via `/v1/models`.",
       },
+      OnlyCustomModel: {
+        Title: "Custom Models Only",
+        SubTitle: "Show only custom models when enabled.",
+      },
       Google: {
         ApiKey: {
           Title: "API Key",

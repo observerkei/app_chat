@@ -7,7 +7,7 @@ export function useAllModels() {
   const configStore = useAppConfig();
   const models = useMemo(() => {
     return collectModelsWithDefaultModel(
-      configStore.models,
+      configStore.OnlyCustomModel ? [] : configStore.models,
       [configStore.customModels, accessStore.customModels].join(","),
       accessStore.defaultModel,
     );

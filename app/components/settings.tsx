@@ -89,6 +89,7 @@ import { ProviderType } from "../utils/cloud";
 import { TTSConfigList } from "./tts-config";
 import { RealtimeConfigList } from "./realtime-chat/realtime-config";
 import { AutoGetModelsSwitch } from "@/custom/app/components/settings/AutoGetModelsSwitch";
+import { OnlyCustomModelsSwitch } from "@/custom/app/components/settings/OnlyCustomModelsSwitch";
 
 function EditPromptModal(props: { id: string; onClose: () => void }) {
   const promptStore = usePromptStore();
@@ -1865,11 +1866,20 @@ export function Settings() {
               type="text"
               value={config.customModels}
               placeholder="model1,model2,model3"
-              onChange={(e) =>
+              onChange={(e) => {
+                if (config.autoGetModels) {
+                  setTimeout(async () => {
+                    await showConfirm(
+                      `${Locale.Settings.Access.AotuCustomModel.Title}: ${Locale.Settings.Access.AotuCustomModel.SubTitle}`,
+                    );
+                  }, 100);
+
+                  return;
+                }
                 config.update(
                   (config) => (config.customModels = e.currentTarget.value),
-                )
-              }
+                );
+              }}
             ></input>
           </ListItem>
 
@@ -1878,6 +1888,8 @@ export function Settings() {
               config.update((config) => (config.customModels = models))
             }
           />
+
+          <OnlyCustomModelsSwitch />
         </List>
 
         <List>

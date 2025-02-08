@@ -544,7 +544,7 @@ const cn = {
       },
       OnlyCustomModel: {
         Title: "只使用自定义模型",
-        SubTitle: "勾选后，只会有自定义模型才会显示。",
+        SubTitle: "勾选后，只有自定义模型才会显示。",
       },
     },
 

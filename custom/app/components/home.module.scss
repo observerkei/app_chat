@@ -1,0 +1,7 @@
+@mixin sidebar-title-custom {
+    color: var(--primary);
+}
+
+@mixin sidebar-sub-title-custom {
+    color: var(--sidebar-sub-title);
+}

@@ -1,5 +1,6 @@
 @import "./animation.scss";
 @import "./window.scss";
+@import '../../custom/app/styles/globals.scss';
 
 @mixin light {
   --theme: light;
@@ -20,6 +21,8 @@
 
   /* stroke */
   --border-in-light: 1px solid rgb(222, 222, 222);
+
+  @include light-custom;
 }
 
 @mixin dark {
@@ -42,6 +45,8 @@
   div:not(.no-dark) > svg {
     filter: invert(0.5);
   }
+
+  @include dark-custom;
 }
 
 .light {

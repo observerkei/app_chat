@@ -1,3 +1,5 @@
+@import '../../custom/app/components/home.module.scss';
+
 @mixin container {
   background-color: var(--white);
   border: var(--border-in-light);
@@ -158,12 +160,14 @@
   font-size: 20px;
   font-weight: bold;
   animation: slide-in ease 0.3s;
+  @include sidebar-title-custom;
 }
 
 .sidebar-sub-title {
   font-size: 12px;
   font-weight: 400;
   animation: slide-in ease 0.3s;
+  @include sidebar-sub-title-custom;
 }
 
 .sidebar-body {

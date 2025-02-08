@@ -1,0 +1,11 @@
+@mixin light-custom {
+    --primary: rgb(49, 94, 248); // #315ef8
+    --second: rgb(243, 243, 246); // #f3f3f6
+    --sidebar-sub-title: rgba(38,47,156,.5); // new
+}
+
+@mixin dark-custom {
+    --primary: rgb(49, 94, 248); // #315ef8
+    --second: rgb(38, 38, 44); // #26262c
+    --sidebar-sub-title: hsla(0, 0%, 100%, .5); // new
+}

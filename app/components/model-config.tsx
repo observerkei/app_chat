@@ -27,7 +27,7 @@ export function ModelConfigList(props: {
         <Select
           aria-label={Locale.Settings.Model}
           value={value}
-          align="left"
+          align="center"
           onChange={(e) => {
             const [model, providerName] = getModelProvider(
               e.currentTarget.value,
@@ -36,6 +36,9 @@ export function ModelConfigList(props: {
               config.model = ModalConfigValidator.model(model);
               config.providerName = providerName as ServiceProvider;
             });
+          }}
+          style={{
+            width: "100%",
           }}
         >
           {Object.keys(groupModels).map((providerName, index) => (

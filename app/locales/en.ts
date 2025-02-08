@@ -522,6 +522,10 @@ const en: LocaleType = {
         Title: "Custom Models",
         SubTitle: "Custom model options, seperated by comma",
       },
+      AotuCustomModel: {
+        Title: "Auto Get Models",
+        SubTitle: "Check to fetch model list via `/v1/models`.",
+      },
       Google: {
         ApiKey: {
           Title: "API Key",

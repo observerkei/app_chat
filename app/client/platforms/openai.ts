@@ -195,7 +195,9 @@ export class ChatGPTApi implements LLMApi {
     let requestPayload: RequestPayload | DalleRequestPayload;
 
     const isDalle3 = _isDalle3(options.config.model);
-    const isO1OrO3 = options.config.model.startsWith("o1") || options.config.model.startsWith("o3");
+    const isO1OrO3 =
+      options.config.model.startsWith("o1") ||
+      options.config.model.startsWith("o3");
     if (isDalle3) {
       const prompt = getMessageTextContent(
         options.messages.slice(-1)?.pop() as any,
@@ -440,8 +442,8 @@ export class ChatGPTApi implements LLMApi {
     } as LLMUsage;
   }
 
-  async models(): Promise<LLMModel[]> {
-    if (this.disableListModels) {
+  async models(disableListModels = true): Promise<LLMModel[]> {
+    if (disableListModels) {
       return DEFAULT_MODELS.slice();
     }
 
@@ -453,9 +455,7 @@ export class ChatGPTApi implements LLMApi {
     });
 
     const resJson = (await res.json()) as OpenAIListModelResponse;
-    const chatModels = resJson.data?.filter(
-      (m) => m.id.startsWith("gpt-") || m.id.startsWith("chatgpt-"),
-    );
+    const chatModels = resJson.data;
     console.log("[Models]", chatModels);
 
     if (!chatModels) {

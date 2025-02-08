@@ -61,6 +61,7 @@ export const DEFAULT_CONFIG = {
   hideBuiltinMasks: false, // dont add builtin masks
 
   customModels: "",
+  autoGetModels: false,
   models: DEFAULT_MODELS as any as LLMModel[],
 
   modelConfig: {
@@ -222,6 +223,7 @@ export const useAppConfig = createPersistStore(
         state.modelConfig.top_p = 1;
         state.modelConfig.template = DEFAULT_INPUT_TEMPLATE;
         state.dontShowMaskSplashScreen = false;
+        state.autoGetModels = false;
         state.hideBuiltinMasks = false;
       }
 

@@ -88,6 +88,7 @@ import { useMaskStore } from "../store/mask";
 import { ProviderType } from "../utils/cloud";
 import { TTSConfigList } from "./tts-config";
 import { RealtimeConfigList } from "./realtime-chat/realtime-config";
+import { AutoGetModelsSwitch } from "@/custom/app/components/settings/AutoGetModelsSwitch";
 
 function EditPromptModal(props: { id: string; onClose: () => void }) {
   const promptStore = usePromptStore();
@@ -1871,6 +1872,12 @@ export function Settings() {
               }
             ></input>
           </ListItem>
+
+          <AutoGetModelsSwitch
+            updateModelsHandle={(models: string) =>
+              config.update((config) => (config.customModels = models))
+            }
+          />
         </List>
 
         <List>

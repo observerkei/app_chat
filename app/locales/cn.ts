@@ -538,6 +538,10 @@ const cn = {
         Title: "自定义模型名",
         SubTitle: "增加自定义模型可选项，使用英文逗号隔开",
       },
+      AotuCustomModel: {
+        Title: "自动获取模型名",
+        SubTitle: "勾选后，自动通过`/v1/models`获取模型列表。",
+      },
     },
 
     Model: "模型 (model)",

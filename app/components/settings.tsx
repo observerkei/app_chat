@@ -91,6 +91,7 @@ import { TTSConfigList } from "./tts-config";
 import { RealtimeConfigList } from "./realtime-chat/realtime-config";
 import { AutoGetModelsSwitch } from "@/custom/app/components/settings/AutoGetModelsSwitch";
 import { OnlyCustomModelsSwitch } from "@/custom/app/components/settings/OnlyCustomModelsSwitch";
+import { useMediaQuery } from "react-responsive";
 
 function EditPromptModal(props: { id: string; onClose: () => void }) {
   const promptStore = usePromptStore();
@@ -743,21 +744,30 @@ export function Settings() {
   const updateModelsHandle = (models: string) =>
     config.update((config) => (config.customModels = models));
 
+  const DesktopWidth = 1200;
+  const isDesktop = useMediaQuery({ minWidth: DesktopWidth });
+
   const openAIConfigComponent = accessStore.provider ===
     ServiceProvider.OpenAI && (
     <>
       <ListItem
         title={Locale.Settings.Access.OpenAI.Endpoint.Title}
         subTitle={Locale.Settings.Access.OpenAI.Endpoint.SubTitle}
-        vertical={true}
+        vertical={isDesktop ? false : true}
       >
         <div
-          style={{
-            width: "100%",
-            maxWidth: "unset",
-            textAlign: "left",
-            display: "flex",
-          }}
+          style={
+            isDesktop
+              ? {
+                  display: "flex",
+                  width: 400,
+                }
+              : {
+                  width: "100%",
+                  maxWidth: "unset",
+                  display: "flex",
+                }
+          }
         >
           <IconButton
             icon={<ResetIcon />}

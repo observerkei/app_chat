@@ -49,7 +49,6 @@ import ShortcutkeyIcon from "../icons/shortcutkey.svg";
 import McpToolIcon from "../icons/tool.svg";
 import HeadphoneIcon from "../icons/headphone.svg";
 import {
-  BOT_HELLO,
   ChatMessage,
   createMessage,
   DEFAULT_TOPIC,
@@ -1334,16 +1333,16 @@ function _Chat() {
     return session.mask.hideContext ? [] : session.mask.context.slice();
   }, [session.mask.context, session.mask.hideContext]);
 
-  if (
-    context.length === 0 &&
-    session.messages.at(0)?.content !== BOT_HELLO.content
-  ) {
-    const copiedHello = Object.assign({}, BOT_HELLO);
-    if (!accessStore.isAuthorized()) {
-      copiedHello.content = Locale.Error.Unauthorized;
-    }
-    context.push(copiedHello);
-  }
+  // if (
+  //   context.length === 0 &&
+  //   session.messages.at(0)?.content !== BOT_HELLO.content
+  // ) {
+  //   const copiedHello = Object.assign({}, BOT_HELLO);
+  //   if (!accessStore.isAuthorized()) {
+  //     copiedHello.content = Locale.Error.Unauthorized;
+  //   }
+  //   context.push(copiedHello);
+  // }
 
   // preview messages
   const renderMessages = useMemo(() => {

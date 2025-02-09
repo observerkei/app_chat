@@ -35,7 +35,6 @@ import {
   MultimodalContent,
   SpeechOptions,
 } from "../api";
-import Locale from "../../locales";
 import { getClientConfig } from "@/app/config/client";
 import {
   getMessageTextContent,
@@ -405,7 +404,8 @@ export class ChatGPTApi implements LLMApi {
     ]);
 
     if (used.status === 401) {
-      throw new Error(Locale.Error.Unauthorized);
+      // throw new Error(Locale.Error.Unauthorized);
+      throw new Error("Error code: 401");
     }
 
     if (!used.ok || !subs.ok) {

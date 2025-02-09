@@ -16,7 +16,6 @@ import {
   MultimodalContent,
   SpeechOptions,
 } from "../api";
-import Locale from "../../locales";
 import {
   EventStreamContentType,
   fetchEventSource,
@@ -225,9 +224,9 @@ export class ErnieApi implements LLMApi {
                 extraInfo = prettyObject(resJson);
               } catch {}
 
-              if (res.status === 401) {
-                responseTexts.push(Locale.Error.Unauthorized);
-              }
+              // if (res.status === 401) {
+              //   responseTexts.push(Locale.Error.Unauthorized);
+              // }
 
               if (extraInfo) {
                 responseTexts.push(extraInfo);

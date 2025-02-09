@@ -14,7 +14,6 @@ import {
   LLMModel,
   SpeechOptions,
 } from "../api";
-import Locale from "../../locales";
 import {
   EventStreamContentType,
   fetchEventSource,
@@ -177,9 +176,9 @@ export class SparkApi implements LLMApi {
                 extraInfo = prettyObject(resJson);
               } catch {}
 
-              if (res.status === 401) {
-                extraInfo = Locale.Error.Unauthorized;
-              }
+              // if (res.status === 401) {
+              //   extraInfo = Locale.Error.Unauthorized;
+              // }
 
               options.onError?.(
                 new Error(

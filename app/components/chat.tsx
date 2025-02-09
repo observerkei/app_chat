@@ -124,6 +124,8 @@ import { getModelProvider } from "../utils/model";
 import { RealtimeChat } from "@/app/components/realtime-chat";
 import clsx from "clsx";
 import { getAvailableClientsCount, isMcpEnabled } from "../mcp/actions";
+import { updateCustomModels } from "@/custom/app/components/settings/AutoGetModelsSwitch";
+import { updateModelsHandle } from "./settings";
 
 const localStorage = safeLocalStorage();
 
@@ -673,7 +675,12 @@ export function ChatActions(props: {
         />
 
         <ChatAction
-          onClick={() => setShowModelSelector(true)}
+          onClick={() => {
+            setShowModelSelector(true);
+            if (config.autoGetModels) {
+              updateCustomModels(config, updateModelsHandle);
+            }
+          }}
           text={currentModelName}
           icon={<RobotIcon />}
         />
@@ -1065,6 +1072,18 @@ function _Chat() {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(measure, [userInput]);
+
+  const isMounted = useRef(false);
+  useEffect(() => {
+    // first launch check
+    if (isMounted.current) return;
+    isMounted.current = true;
+
+    // update models
+    if (config.autoGetModels) {
+      updateCustomModels(config, updateModelsHandle);
+    }
+  }, []);
 
   // chat commands shortcuts
   const chatCommands = useChatCommand({

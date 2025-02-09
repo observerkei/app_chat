@@ -584,6 +584,9 @@ function SyncItems() {
   );
 }
 
+export const updateModelsHandle = (config: any, models: string) =>
+  config.update((config: any) => (config.customModels = models));
+
 export function Settings() {
   const navigate = useNavigate();
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
@@ -740,9 +743,6 @@ export function Settings() {
         ></input>
       </ListItem>
     );
-
-  const updateModelsHandle = (models: string) =>
-    config.update((config) => (config.customModels = models));
 
   const DesktopWidth = 1200;
   const isDesktop = useMediaQuery({ minWidth: DesktopWidth });
@@ -1918,7 +1918,10 @@ export function Settings() {
             ></input>
           </ListItem>
 
-          <AutoGetModelsSwitch updateModelsHandle={updateModelsHandle} />
+          <AutoGetModelsSwitch
+            config={config}
+            updateModelsHandle={updateModelsHandle}
+          />
 
           <OnlyCustomModelsSwitch />
         </List>

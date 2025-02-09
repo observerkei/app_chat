@@ -7,7 +7,7 @@ import {
 } from "@/app/store";
 import { ChatGPTApi } from "@/app/client/platforms/openai";
 
-export const updateCustomModels = (updateModelsHandle: any) => {
+export const updateCustomModels = (config: any, updateModelsHandle: any) => {
     const api = new ChatGPTApi();
 
     setTimeout((async () => {
@@ -23,19 +23,20 @@ export const updateCustomModels = (updateModelsHandle: any) => {
             customModels += model.name;
         }
         // console.log(`customModels: ${customModels}`)
-        updateModelsHandle(customModels);
+        updateModelsHandle(config, customModels);
     }), 200);
 };
 
 
 type Params = {
+    config: any;
     updateModelsHandle: any;
 };
 
 export function AutoGetModelsSwitch({
-    updateModelsHandle
+    config,
+    updateModelsHandle,
 }: Params) {
-    const config = useAppConfig();
     const updateConfig = config.update;
 
     return (
@@ -49,10 +50,10 @@ export function AutoGetModelsSwitch({
                 checked={config.autoGetModels}
                 onChange={(e) => {
                     updateConfig(
-                        (config) => (config.autoGetModels = e.currentTarget.checked),
+                        (config: any) => (config.autoGetModels = e.currentTarget.checked),
                     );
                     if (e.currentTarget.checked) {
-                        updateCustomModels(updateModelsHandle);
+                        updateCustomModels(config, updateModelsHandle);
                     }
                 }}
             ></input>

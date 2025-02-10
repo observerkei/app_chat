@@ -761,11 +761,13 @@ export function Settings() {
               ? {
                   display: "flex",
                   width: 400,
+                  gap: 4,
                 }
               : {
                   width: "100%",
                   maxWidth: "unset",
                   display: "flex",
+                  gap: 4,
                 }
           }
         >

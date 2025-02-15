@@ -1,4 +1,5 @@
 @import "../styles/animation.scss";
+@import '../../custom/app/styles/globals.scss';
 
 .attach-images {
   position: absolute;
@@ -358,6 +359,8 @@
     color: var(--black);
     margin-left: 6px;
   }
+
+  @include chat-message-header-custom;
 }
 
 .chat-message-container {
@@ -542,6 +545,8 @@
   padding-right: 10px;
   pointer-events: none;
   z-index: 1;
+
+  @include chat-message-action-date-custom;
 }
 
 .chat-message-user > .chat-message-container > .chat-message-item {

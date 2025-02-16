@@ -16,7 +16,7 @@
 
 @mixin chat-message-action-date-custom {
     text-align: center;
-    margin: 10px 0 0;
+    margin: 10px 0 4px;
 }
 
 .chat-message-bottom-custom {
@@ -32,7 +32,7 @@
       justify-content: space-between;
       transition: all ease 0.3s;
       transform: scale(0.9) translateY(5px);
-      margin: 0 10px;
+      margin: 0 0 4px;
       opacity: 0;
       pointer-events: none;
   

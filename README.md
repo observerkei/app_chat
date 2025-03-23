@@ -471,3 +471,12 @@ If you want to add a new translation, read this [document](./docs/translation.md
 ## LICENSE
 
 [MIT](https://opensource.org/license/mit/)
+
+
+# Customization
+
+- Adjust the color scheme
+- Adaptive full screen
+- Add a conditional filtering component to accommodate multi-terminal layouts
+- Add Waline comment components, access statistics, and adapt Giscus comment short chains
+- Adjust the night mode button position, adjust the mobile title index height, and reduce the directory indentation

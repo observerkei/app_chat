@@ -372,3 +372,12 @@ bash <(curl -s https://raw.githubusercontent.com/Yidadaa/ChatGPT-Next-Web/main/s
 ## 开源协议
 
 [MIT](https://opensource.org/license/mit/)
+
+
+# 定制功能
+
+- 调整配色
+- 自适应全屏
+- 追加条件过滤组件，适应多端布局
+- 添加Waline评论组件、访问统计、适配Giscus评论短链
+- 调整夜间模式按钮位置，调整移动端标题索引高度，缩减目录缩进
